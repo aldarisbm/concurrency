@@ -20,8 +20,9 @@ func main() {
 		"epsilon",
 	}
 
+	wg.Add(len(words) + 1)
+
 	for i, w := range words {
-		wg.Add(1)
 		// dont copy nor modify, pass waitGroups as pointers
 		go printSomething(fmt.Sprintf("%d: %s", i, w), &wg)
 	}
