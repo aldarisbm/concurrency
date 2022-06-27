@@ -2,12 +2,9 @@ package main
 
 import (
 	"fmt"
-	"sync"
 )
 
 func main() {
-	var wg sync.WaitGroup
-
 	words := []string{
 		"alpha",
 		"beta",
@@ -20,11 +17,13 @@ func main() {
 		"epsilon",
 	}
 
-	wg.Add(len(words) + 1)
+	wg.Add(len(words))
 
 	for i, w := range words {
 		// dont copy nor modify, pass waitGroups as pointers
 		go printSomething(fmt.Sprintf("%d: %s", i, w), &wg)
 	}
 	wg.Wait()
+
+	challenge()
 }
