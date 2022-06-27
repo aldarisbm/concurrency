@@ -1,4 +1,4 @@
-package main
+package challengeone
 
 import (
 	"fmt"
@@ -17,7 +17,7 @@ func printMessage() {
 	fmt.Println(msg)
 }
 
-func challenge() {
+func ChallengeOne() {
 
 	// challenge: modify this code so that the calls to updateMessage() on lines
 	// 28, 30, and 33 run as goroutines, and implement wait groups so that
