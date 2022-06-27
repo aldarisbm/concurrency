@@ -1,5 +1,13 @@
 package examples
 
+import (
+	"io"
+	"os"
+	"strings"
+	"sync"
+	"testing"
+)
+
 func Test_printSomething(t *testing.T) {
 	stdOut := os.Stdout
 
@@ -9,7 +17,7 @@ func Test_printSomething(t *testing.T) {
 
 	wg.Add(1)
 
-	go printSomething("epsilon", &wg)
+	go PrintSomething("epsilon", &wg)
 
 	wg.Wait()
 
