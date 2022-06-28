@@ -24,6 +24,9 @@ var wg sync.WaitGroup
 var sleepTime = 1 * time.Second
 var eatTime = 2 * time.Second
 
+var donePhilosophers []string
+var doneLock sync.Mutex
+
 func DiningPhilosophers() {
 	// print intro
 
@@ -40,6 +43,9 @@ func DiningPhilosophers() {
 	}
 
 	wg.Wait()
+	for i, p := range donePhilosophers {
+		fmt.Printf("%s, finished %d\n", p, i+1)
+	}
 }
 
 func diningProblem(philosopher string, leftFork, rightFork *sync.Mutex) {
@@ -66,10 +72,13 @@ func diningProblem(philosopher string, leftFork, rightFork *sync.Mutex) {
 		leftFork.Unlock()
 		color.Yellow(fmt.Sprintf("\t%s put down the fork on his left.", philosopher))
 
-		time.Sleep(sleepTime)
 	}
+	doneLock.Lock()
+	donePhilosophers = append(donePhilosophers, philosopher)
+	doneLock.Unlock()
 
 	color.Green(fmt.Sprint(philosopher, " is satisfied.\n"))
 	time.Sleep(sleepTime)
 	color.Green(fmt.Sprint(philosopher, " has left the table.\n"))
+
 }
