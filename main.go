@@ -1,8 +1,7 @@
 package main
 
-import producerconsumer "github.com/aldarisbm/concurrency/producer_consumer"
+import diningphilosophers "github.com/aldarisbm/concurrency/dining_philosophers"
 
 func main() {
-	producerconsumer.ProducerConsumer()
-
+	diningphilosophers.DiningPhilosophers()
 }
